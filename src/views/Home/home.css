@@ -1,0 +1,22 @@
+
+.app-title{
+    text-align: center;
+    color:#e37133;
+    font-size: 50px;
+}
+body{
+    background-color: #f1e5e4;
+}
+.contacts-container{
+    background-color: white;
+    height: 500px;
+    width: 400px;
+}
+.app-body{
+    display: flex;
+    justify-content: space-around;
+}
+.sub-heading{
+    text-align: center;
+    font-size: 30px;
+}
