@@ -7,11 +7,6 @@
 body{
     background-color: #f1e5e4;
 }
-.contacts-container{
-    background-color: white;
-    height: 500px;
-    width: 400px;
-}
 .app-body{
     display: flex;
     justify-content: space-around;
@@ -19,4 +14,24 @@ body{
 .sub-heading{
     text-align: center;
     font-size: 30px;
+}
+.user-input{
+    display: block;
+    font-size: 25px;
+    padding: 5px;
+    margin: 30px;
+    border-radius: 5px;
+    border: solid 1px #e37133;
+}
+.btn-add-contact{
+    display: block;
+    font-size: 30px;
+    padding: 5px 30px;
+    margin: auto;
+    color: white;
+    background-color: #e37133;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+
 }
