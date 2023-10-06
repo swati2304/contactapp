@@ -20,6 +20,15 @@
 .icon-delete-contact{
     position: absolute;
     bottom: 10px;
+    right: 40px;
+    box-shadow: 10px;
+    padding: 3px;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+.icon-edit-contact{
+    position: absolute;
+    bottom: 10px;
     right: 10px;
     box-shadow: 10px;
     padding: 3px;

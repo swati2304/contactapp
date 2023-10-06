@@ -1,6 +1,6 @@
 import "./home.css"
 import ContactCard from "../../components/contactCard/contactCard";
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import showToast from 'crunchy-toast';
 
 export default function Home(){
@@ -52,7 +52,9 @@ export default function Home(){
             mobile: mobile
         }
 
-        setContancts([...contacts, obj]);
+        const newContacts = [...contacts, obj];
+        setContancts(newContacts);
+        saveToLocalStorage(newContacts);
 
         showToast('Contact added successfully', 'success', 3000);
 
@@ -70,11 +72,32 @@ export default function Home(){
             }
         })
         contacts.splice(indexToDelete, 1);
+        saveToLocalStorage(contacts);
         setContancts([...contacts]);
 
         showToast('Contact Delete Successfully', 'success', 3000);
     }
 
+    const saveToLocalStorage = (contacts) => {
+        localStorage.setItem('contacts', JSON.stringify(contacts));
+    }
+
+    const loadFromLocalStorage = () =>{
+        const contactsDeta = JSON.parse(localStorage.getItem(contacts));
+        if(contactsDeta){
+            setContancts(contactsDeta);
+        }
+    }
+     useEffect(()=>{
+        loadFromLocalStorage();
+     }, []);  
+    
+    const enableToEditMode = (index) =>{
+        const contactDeta = contacts(index);
+        setname(contactDeta.name);
+        setemail(contactDeta.email);
+        setmobile(contactDeta.mobile);
+    }
     return(
         <div>
             <h1 className="app-title"> 📞Contact App</h1>
@@ -90,7 +113,9 @@ export default function Home(){
                                 name={contacts.name} 
                                 mobile={contacts.mobile}
                                 email={contacts.email}
-                                deleteContact={deleteContact}/>)
+                                deleteContact={deleteContact}
+                                enableToEditMode={enableToEditMode}
+                                index={index}/>)
                         })
                     }
                 </div>
