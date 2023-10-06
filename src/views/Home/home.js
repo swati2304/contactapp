@@ -7,29 +7,21 @@ export default function Home(){
     const [contacts, setContancts] = useState([
         {
             name:"Swati",
-            mobile:"8459666580",
-            email:"swatinimje23@gmail.com"
-        },
-        {
-            name:"Akaksh",
-            mobile:"8459666580",
-            email:"akakshnimje23@gmail.com"
+            email:"swatinimje23@gmail.com",
+            mobile:"8459666580"
         },
         {
             name:"Umesh",
-            mobile:"8329590949",
-            email:"umeshnimje23@gmail.com"
+            email:"umeshnimje23@gmail.com",
+            mobile:"8329590949"
         },
-        {
-            name:"Aviksha",
-            mobile:"8459666580",
-            email:"avikshanimje23@gmail.com"
-        }
     ]);
 
     const [name, setname] = useState('');
     const [email, setemail] = useState('');
     const [mobile, setmobile] = useState('');
+    const [editIndex, seteditIndex] = useState(-1);
+    const [isEditMode, setisEditMode] = useState(false);
 
     const addContact = ()=>{
 
@@ -97,7 +89,26 @@ export default function Home(){
         setname(contactDeta.name);
         setemail(contactDeta.email);
         setmobile(contactDeta.mobile);
+        seteditIndex(index.value);
+        setisEditMode (true);
     }
+
+    const editContact = ()=>{
+        const obj = {
+            name:name,
+            email:email,
+            mobile: mobile
+        }
+        contacts.editIndex=obj;
+        setContancts([...contacts]);
+        saveToLocalStorage(contacts);
+        showToast('Contact Delete Successfully', 'success', 3000);
+        setname('');
+        setemail('');
+        setmobile('');
+        setisEditMode(false);
+    }
+
     return(
         <div>
             <h1 className="app-title"> 📞Contact App</h1>
@@ -107,7 +118,7 @@ export default function Home(){
                     <h2 className="sub-heading">Show Contacts</h2>
                     {
                         contacts.map((contacts, index)=>{
-                            const {name, mobile, email}= contacts;
+                            const {name, email, mobile} = contacts;
                             return( <ContactCard
                                 key={index}
                                 name={contacts.name} 
@@ -120,7 +131,8 @@ export default function Home(){
                     }
                 </div>
                 <div className="contacts-container">
-                    <h2 className="sub-heading">Add Contacts</h2>
+                    <h2 className="sub-heading">
+                    Add Contact</h2>
                     <form>
                         <input type="text" 
                         placeholder="Name"  
@@ -147,8 +159,11 @@ export default function Home(){
                         value={mobile}/>
                         
                         <button type="button" className="btn-add-contact"
-                        onClick={addContact}>
-                        Add Contact</button>
+                        onClick={(()=>{
+                            isEditMode ? editContact():addContact(); 
+                        })}>
+                            {isEditMode ? 'Edit Contact':'Add Contact'}
+                        </button>
                     </form>
                 </div>
             </div>

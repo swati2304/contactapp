@@ -12,6 +12,7 @@ export default function ContactCard({name, mobile, email, deleteContact, enableT
             }}>
                 🗑️
                 </span>
+                
                 <span className="icon-edit-contact" onClick={()=>{
                     enableToEditMode(index);
             }}>
